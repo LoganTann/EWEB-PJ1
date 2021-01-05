@@ -16,7 +16,7 @@
   }
   100% {
     transform: none;
-    opacity: 0;
+    display: none;
   }
 }
 @keyframes rotateOutDownLeft {
