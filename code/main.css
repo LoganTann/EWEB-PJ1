@@ -1,6 +1,8 @@
+/*source serif*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&family=Zilla+Slab+Highlight:wght@700&display=swap');
-
+/*open sans condensed*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap');
 
 /*
   EFFET BARRES CENSURE TOMBANTES
@@ -16,6 +18,7 @@
   }
   100% {
     transform: none;
+    opacity: 0;
     display: none;
   }
 }
@@ -29,19 +32,18 @@
   }
   100% {
     transform: none;
+    opacity: 0;
     display: none;
   }
 }
 
 html,
 body {
+  /* css reset */
   width: 100%;
   height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+  margin: 0;
+  padding: 0;
   font-family: 'Source Serif Pro', serif;
 }
 html {
@@ -50,20 +52,168 @@ html {
 body {
   font-size: 1.1rem;
 }
+h1 {
+  font-size: 5em;
+  text-align: center;
+  margin:0;
+}
+
+h2 {
+  font-size: 2.3em;
+  text-align: center;
+}
+
+#headline {
+  display: flex;
+  justify-content: space-around;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  margin-bottom: 2em;
+  margin-left: 0.2em;
+  margin-right:0.2em;
+  padding: 0.8em;
+  font-size: 0.8em;
+}
+#headline>div{
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-transform: uppercase;
+}
+
+
+/*menu*/
 nav {
-  font-family: 'Zilla Slab Highlight', cursive;
-  font-size: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0.8em;
+  margin: 0.8em;
 }
+
+nav a {
+  margin: 0 5px;
+  width: 25em;
+  margin-bottom:1em;
+}
+nav a, #Titre a, footer a {
+  color: black;
+  text-decoration: none;
+}
+
+#Titre a{
+  display:flex;
+  justify-content: center;
+  margin:0;
+}
+
+#tab{
+  width:100%;
+    height:100%;
+  
+}
+
+#Titre img{
+  max-height:110px;
+}
+
+
+.articleBox {
+  display: flex;
+}
+.articleBox img{
+  max-width:  8em;
+  max-height: 8em;
+}
+.articleBox div {
+  margin-left:1em;
+}
+
+.authors img{
+  border-radius: 50%;
+  max-width: 2em;
+  margin: 0.5em;
+}
+.authors div {
+  display: flex;
+  align-items: center;
+}
+#sidenav .plan {
+  margin-top: 1em;
+  position: sticky;
+  top: 1em;
+}
+.plan>ul {
+  border-left: 5px solid blue;
+  list-style-type: none;
+  padding-left: 0.5em;
+}
+
+h5 {
+  font-weight:bold;
+  color: black;
+  font-size:24px;
+  transition: color 0.3s;
+  margin-top:0;
+  margin-bottom: 0.3em;
+}
+
+/* normalement ça fonctionne */
+nav a:hover h5 , footer a:hover{
+  color: rgb(108, 196, 255);
+  text-decoration:underline;
+}
+
+.grosseImg {
+  width: 100%;
+}
+
+/*footer*/
+footer {
+  display:flex;
+  justify-content: flex-end;
+  border-bottom: 3px solid black;
+  padding: 1em;
+  border-top: 1px black solid;
+  margin:1em;
+}
+
+footer a{
+  font-weight:bold;
+  padding-left:1.5em;
+  padding-right:1.5em;
+  transition: color 0.3s;
+}
+
+/*article
+#main{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
 article {
-  width: 70%;
+  grid-area: 1 / 2 / 2 / 5;
+  width: 100%;
 }
-#pageContent>p {
+#sidenav {
+  padding: 1em;
+  grid-area: 1 / 5 / 2 / 6;
+} 
+*/
+
+#sidenav {
+  padding: 1em;
+}
+
+
+#pageContent p {
   color: black;
 	opacity: 0;
-  transition: opacity 0.5s;
   position: relative;
+  text-align:justify;
 }
-#pageContent>p::after {
+#pageContent p::after {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -73,19 +223,152 @@ article {
   left: 0;
   pointer-events: none; 
 }
+#pageContent>.activated p {
+  opacity: 1;
+}
 
-#pageContent>p.activated::after {
+
+#pageContent p.activated::after,
+#pageContent>.activated p::after /*fix : animation pour les p enfants d'éléments activés */
+{
   animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-delay: 1s;
 }
-/* censures impaires */
-#pageContent>p.activated:nth-of-type(2n+1)::after {
+/* censures impaires (2n+1)*/
+#pageContent p.activated:nth-of-type(2n+1)::after,
+#pageContent>.activated p:nth-of-type(2n+1)::after /*fix : idem */
+{
   animation-name: rotateOutDownLeft;
   transform-origin: left bottom;
 }
-/* censures paires */
-#pageContent>p.activated:nth-of-type(2n)::after {
+/* censures paires (2n)*/
+#pageContent p.activated:nth-of-type(2n)::after,
+#pageContent>.activated p:nth-of-type(2n)::after /*fix : idem */
+{
   animation-name: rotateOutDownRight;
   transform-origin: right bottom;
 }
+
+/*la france*/
+#papier{
+  width:100%;
+}
+
+#journaux{
+  height:20em;
+  overflow:hidden;
+}
+
+#marianne {
+  height:19em;
+  width:auto;
+}
+
+#loipresse{
+    margin-left:1em;
+}
+#loipresse, #floutage{
+  width:20em;
+  height:auto;
+}
+
+.img-flot{
+  float:left;
+}
+
+.img-flot2{
+  float:right;
+}
+
+div p {
+  margin-top:0;
+}
+
+#lacensure{
+  clear:both;
+}
+
+#degueule{
+  display:flex;
+  flex-direction:column;
+  margin:1em;
+  margin-bottom:0;
+}
+#degueule p{
+ width:20em; 
+ padding-top:1em;
+}
+
+#michel{
+  max-width:100%;
+  clear:both;
+}
+
+#pad-top{
+  padding-top:1em;
+}
+
+.bonne {
+  background-color: black;
+  color: white;
+}
+.plutot_bonne {
+  background-color: #c0504d;
+  color: white;
+}
+.problematique {
+  background-color: #f79646;
+  color: black;
+}
+.difficile {
+  background-color: #eef79e;
+  color: black;
+}
+.grave {
+  background-color: #eeece1;
+  color: black;
+}
+
+
+.swiper-container {
+  height: 540px;
+}
+.swiper-slide {
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: auto 480px;
+}
+
+.tabsVerticales .boutons {
+  background-color: #ddd9d6;
+  padding: 0;
+  
+}
+.tabsVerticales .boutons a {
+  color: black;
+  text-decoration: none;
+}
+
+.tabsVerticales .boutons a>h3 {
+  text-align: center;
+  padding: 1em;
+  margin: 0;
+}
+.tabsVerticales .boutons a.active>h3 {
+  background-color: #c7bdb1;
+}
+.tabsVerticales .items{
+  display: flex;
+  align-items: center;
+}
+.tabsVerticales .items div {
+  display: none;
+}
+
+.tabsVerticales .items div.active {
+  display: initial;
+}
+
+
+
